@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>គណនាថ្លៃផ្ញើរយានជំនិះ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #f5f1e8;
+        color: #222222;
+        font-family: "Battambang", sans-serif;
+        padding: 25px;
+      }
+
+      h2 {
+        color: rgb(38, 126, 96);
+        text-align: center;
+      }
+
+      label,
+      button,
+      select,
+      input {
+        font-family: "Battambang", sans-serif;
+      }
+
+      label {
+        color: #222222;
+        font-weight: bold;
+      }
+
+      select,
+      input {
+        background-color: #ffffff;
+        color: #222222;
+        border: 1px solid #d8dde2;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #75c08e;
+        color: #222222;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #2d9b5a;
+      }
+
+      input[readonly] {
+        width: 250px;
+      }
+
+      hr {
+        border: 1px solid #d8dde2;
+      }
+
+      .error {
+        color: red;
+        font-family: "Battambang", sans-serif;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>គណនាថ្លៃផ្ញើរយានជំនិះ</h2>
+
+    <label>ជ្រើសរើស យានជំនិះ:</label>
+
+    <select id="vehicle">
+      <option value="car">ឡាន</option>
+      <option value="moto">ម៉ូតូ</option>
+    </select>
+
+    <br /><br />
+
+    <label>ម៉ោងចូល:</label>
+    <input id="timeIn" type="time" />
+
+    <br /><br />
+
+    <label>ម៉ោងចេញ:</label>
+    <input id="timeOut" type="time" />
+
+    <br /><br />
+
+    <label>ថ្លៃផ្ញើរ រៀល:</label>
+    <input id="riel" type="text" readonly /> ៛
+
+    <br /><br />
+
+    <label>ថ្លៃផ្ញើរ ដុល្លា:</label>
+    <input id="dollar" type="text" readonly /> $
+
+    <br /><br />
+
+    <button onclick="calculate()">គណនា</button>
+
+    <p id="error" class="error"></p>
+
+    <script>
+      function calculate() {
+        const vehicle = document.getElementById("vehicle").value;
+
+        const timeIn = document.getElementById("timeIn").value;
+        const timeOut = document.getElementById("timeOut").value;
+
+        if (timeIn === "" || timeOut === "") {
+          document.getElementById("error").innerHTML =
+            "Error: អត់បានបញ្ចូលម៉ោងហើយ ណប់ចិត្ត :)";
+          return;
+        }
+
+        document.getElementById("error").innerHTML = "";
+
+        const inParts = timeIn.split(":");
+        const outParts = timeOut.split(":");
+
+        let startMinutes = Number(inParts[0]) * 60 + Number(inParts[1]);
+
+        let endMinutes = Number(outParts[0]) * 60 + Number(outParts[1]);
+
+        if (endMinutes < startMinutes) {
+          endMinutes = endMinutes + 24 * 60;
+        }
+
+        const hours = (endMinutes - startMinutes) / 60;
+
+        let rate = 0;
+
+        if (vehicle === "car") {
+          if (hours <= 8) {
+            rate = 500;
+          } else {
+            rate = 1000;
+          }
+        }
+
+        if (vehicle === "moto") {
+          if (hours <= 8) {
+            rate = 200;
+          } else {
+            rate = 300;
+          }
+        }
+
+        const totalRiel = hours * rate;
+
+        const roundedRiel = Math.round(totalRiel);
+
+        const totalDollar = (roundedRiel / 4000).toFixed(2);
+
+        document.getElementById("riel").value =
+          roundedRiel.toLocaleString("en-US");
+
+        document.getElementById("dollar").value = totalDollar;
+      }
+    </script>
+  </body>
+</html>
