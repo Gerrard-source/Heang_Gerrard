@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="km">
   <head>
@@ -16,10 +17,21 @@
 
     <style>
       body {
-        background-color: #f5f1e8;
+        background-color: #ffffff;
         color: #222222;
         font-family: "Battambang", sans-serif;
         padding: 25px;
+        margin: 0;
+      }
+
+      .container {
+        background-color: #f5f1e8;
+        max-width: 700px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 30px auto;
+        padding: 25px;
+        border-radius: 10px;
       }
 
       h2 {
@@ -66,6 +78,8 @@
 
       input[readonly] {
         width: 250px;
+        max-width: 100%;
+        box-sizing: border-box;
       }
 
       hr {
@@ -81,40 +95,44 @@
   </head>
 
   <body>
-    <h2>គណនាថ្លៃផ្ញើរយានជំនិះ</h2>
+    <div class="container">
 
-    <label>ជ្រើសរើស យានជំនិះ:</label>
+      <h2>គណនាថ្លៃផ្ញើរយានជំនិះ</h2>
 
-    <select id="vehicle">
-      <option value="car">ឡាន</option>
-      <option value="moto">ម៉ូតូ</option>
-    </select>
+      <label>ជ្រើសរើស យានជំនិះ:</label>
 
-    <br /><br />
+      <select id="vehicle">
+        <option value="car">ឡាន</option>
+        <option value="moto">ម៉ូតូ</option>
+      </select>
 
-    <label>ម៉ោងចូល:</label>
-    <input id="timeIn" type="time" />
+      <br /><br />
 
-    <br /><br />
+      <label>ម៉ោងចូល:</label>
+      <input id="timeIn" type="time" />
 
-    <label>ម៉ោងចេញ:</label>
-    <input id="timeOut" type="time" />
+      <br /><br />
 
-    <br /><br />
+      <label>ម៉ោងចេញ:</label>
+      <input id="timeOut" type="time" />
 
-    <label>ថ្លៃផ្ញើរ រៀល:</label>
-    <input id="riel" type="text" readonly /> ៛
+      <br /><br />
 
-    <br /><br />
+      <label>ថ្លៃផ្ញើរ រៀល:</label>
+      <input id="riel" type="text" readonly /> ៛
 
-    <label>ថ្លៃផ្ញើរ ដុល្លា:</label>
-    <input id="dollar" type="text" readonly /> $
+      <br /><br />
 
-    <br /><br />
+      <label>ថ្លៃផ្ញើរ ដុល្លា:</label>
+      <input id="dollar" type="text" readonly /> $
 
-    <button onclick="calculate()">គណនា</button>
+      <br /><br />
 
-    <p id="error" class="error"></p>
+      <button onclick="calculate()">គណនា</button>
+
+      <p id="error" class="error"></p>
+
+    </div>
 
     <script>
       function calculate() {
